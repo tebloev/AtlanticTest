@@ -2,7 +2,6 @@ package com.example.atlantic;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,9 +29,7 @@ public class MainActivity extends Activity {
 				int a = Integer.parseInt(mEditA.getText().toString());
 				int b = Integer.parseInt(mEditB.getText().toString());
 				int c = Integer.parseInt(mEditC.getText().toString());
-//				new SumTask().execute(a, b, c);				
 				Intent i= new Intent(MainActivity.this, SumService.class);
-				// potentially add data to the intent
 				i.putExtra("a", a);
 				i.putExtra("b", b);
 				i.putExtra("c", c);
@@ -41,31 +38,5 @@ public class MainActivity extends Activity {
 		});
 		
 	}
-	public class SumTask extends AsyncTask<Integer, Integer, Integer>
-	{	
-		@Override
-		protected Integer doInBackground(Integer... nums) {
-			int result;
-	        try {
-	            Thread.sleep(nums[2]*1000);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }			
-	        result = nums[0] + nums[1];
-			return result;
-		}
-		
-		@Override 
-		protected void onPreExecute()
-		{
-		}
-		
-		@Override
-		protected void onPostExecute(Integer result) {
-			super.onPostExecute(result);			
-			EditText mEditD = (EditText)findViewById(R.id.editText4);
-			mEditD.setText(String.valueOf(result));
-		}
-	}
-	
+
 }
